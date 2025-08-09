@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
-import requests
+import requests, os
 from functools import wraps
 
 app = Flask(__name__)
@@ -19,7 +19,7 @@ def login_required(f):
     return decorated_function
 
 # URL base del backend en Spring Boot
-SPRING_BOOT_URL = "http://localhost:8080/api"
+SPRING_BOOT_URL = os.getenv("SPRING_BOOT_URL", "http://localhost:8080/api")
 
 ### ---------- LOGIN ----------
 
