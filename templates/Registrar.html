@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link rel="shortcut icon" href="static/images/favicon/favicon-32x32.png" type="image/x-icon">
+    <script src="htps://kit.fontawesome.com/49f031506e.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+    <link rel="shortcut icon" href="static/IMG/PANDA icon.ico" type="imagte/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/styles.css') }}">
+</head>
+<body>
+
+<div class="login-box">
+    <img class="avatar" src="static/IMG/PANDA.webp" alt="Logo de PANDA">
+    <h1>PANDA</h1>
+    <form action="/registrar-usuario" method="POST">
+    <label for="nombre">Nombre</label>
+    <input type="text" id="nombre" name="nombre" required>
+
+    <label for="usuario">Usuario</label>
+    <input type="text" id="usuario" name="usuario" required>
+
+    <label for="correo">Correo</label>
+    <input type="text" id="correo" name="correo" required>
+
+    <label for="contrasena">Contraseña</label>
+    <input type="password" id="contrasena" name="contrasena" required>
+
+    <input type="submit" value="Registrarse">
+
+        <a href="{{ url_for('login') }}">Regresar</a>
+    </form>
+</div>
+
+<script>
+    document.querySelector("form").addEventListener("submit", function (event) {
+        const password = document.getElementById("password").value;
+        if (password === '') {
+            alert("La contraseña es obligatoria");
+            event.preventDefault();
+        }
+    });
+</script>
+
+</body>
+</html>
