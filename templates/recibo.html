@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Recibo de Venta</title>
+    <link rel="shortcut icon" href="static/images/favicon/favicon-32x32.png" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/49f031506e.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+    <link rel="shortcut icon" href="static/IMG/PANDA icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>🧾 Recibo de Venta</h1>
+
+        <table class="tabla-productos">
+            <thead>
+                <tr>
+                    <th>ID Venta</th>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unitario</th>
+                    <th>Medio de Pago</th>
+                    <th>Fecha</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ venta["id"] }}</td>
+                    <td>{{ venta["producto"]["nombre_producto"] }}</td>
+                    <td>{{ venta["cantidad"] }}</td>
+                    <td>${{ venta["precioUnitario"] }}</td>
+                    <td>{{ venta["medioPago"]["nombre"] }}</td>
+                    <td>{{ venta["fecha"] }}</td>
+                    <td><strong>${{ total }}</strong></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div style="margin-top: 30px;">
+            <a href="{{ url_for('nueva_venta') }}" class="boton-regresar">➕ Registrar otra venta</a>
+            <a href="{{ url_for('cierre_caja') }}" class="boton-regresar">💵 Ir al cierre de caja</a>
+        </div>
+    </div>
+</body>
+</html>

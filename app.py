@@ -158,7 +158,9 @@ def nueva_venta():
             response = requests.post(f"{SPRING_BOOT_URL}/ventas", json=data)
 
             if response.status_code == 201:
-                return redirect(url_for('bienvenida'))
+                venta = response.json()  # recupera la venta recién creada
+                venta_id = venta.get("id")
+                return redirect(url_for('recibo', venta_id=venta_id))
             else:
                 return f"Error al registrar la venta: {response.text}", 500
         except Exception as e:
@@ -167,6 +169,21 @@ def nueva_venta():
     productos = requests.get(f"{SPRING_BOOT_URL}/productos").json()
     medios_pago = requests.get(f"{SPRING_BOOT_URL}/MedioPago").json()
     return render_template("nueva-venta.html", productos=productos, medios_pago=medios_pago)
+
+###----------- RECIBO DE VENTA ---------
+@app.route('/recibo/<int:venta_id>')
+@login_required
+def recibo(venta_id):
+    try:
+        response = requests.get(f"{SPRING_BOOT_URL}/ventas/{venta_id}")
+        if response.status_code == 200:
+            venta = response.json()
+            total = venta["cantidad"] * venta["precioUnitario"]
+            return render_template("recibo.html", venta=venta, total=total)
+        else:
+            return f"Error al obtener el recibo: {response.text}", 500
+    except Exception as e:
+        return f"Error en el servidor Flask: {e}", 500
 
 
 ### ---------- CIERRE DE CAJA ----------
