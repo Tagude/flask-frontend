@@ -159,7 +159,8 @@ def nueva_venta():
 
             if response.status_code == 201:
                 venta = response.json()  # recupera la venta recién creada
-                venta_id = venta.get("id")
+                venta_id = venta.get("idVenta")
+                
                 return redirect(url_for('recibo', venta_id=venta_id))
             else:
                 return f"Error al registrar la venta: {response.text}", 500
